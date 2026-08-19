@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
-const PORT = 3000;
+require("dotenv").config();
+const PORT = process.env.PORT;
 const indexRouter = require("./routes/indexRouter");
+console.log(PORT);
 
 const path = require("node:path");
 const { runInThisContext } = require("node:vm");
