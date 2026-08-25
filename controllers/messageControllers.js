@@ -19,7 +19,27 @@ async function getSingleMessage(req, res) {
   }
 }
 
+async function getNewMessageForm(req, res) {
+  try {
+    res.render("form");
+  } catch (err) {
+    console.error("Error rendering form: ", err);
+  }
+}
+
+async function postNewMessage(req, res) {
+  try {
+    const { username, message } = req.body;
+    db.postNewMessage(username, message);
+    res.redirect("/");
+  } catch (err) {
+    console.error("post message request error: ", err);
+  }
+}
+
 module.exports = {
   getMessages,
   getSingleMessage,
+  getNewMessageForm,
+  postNewMessage,
 };

@@ -20,12 +20,13 @@ async function getSingleMessage(id) {
   }
 }
 
-async function insertMessage(username, message) {
+async function postNewMessage(username, message) {
   try {
     await pool.query(
       "INSERT INTO messages (username, message) VALUES (($1), ($2))",
       [username, message],
     );
+    console.log("Message posted to db");
   } catch (error) {
     console.error("db insert error: ", error);
   }
@@ -34,5 +35,5 @@ async function insertMessage(username, message) {
 module.exports = {
   getAllMessages,
   getSingleMessage,
-  insertMessage,
+  postNewMessage,
 };
