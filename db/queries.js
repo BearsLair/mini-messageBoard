@@ -9,6 +9,17 @@ async function getAllMessages() {
   }
 }
 
+async function getSingleMessage(id) {
+  try {
+    const { rows } = await pool.query("SELECT * FROM messages WHERE id = $1", [
+      id,
+    ]);
+    return rows;
+  } catch (error) {
+    console.error("db retrieval error: ", error);
+  }
+}
+
 async function insertMessage(username, message) {
   try {
     await pool.query(
@@ -22,5 +33,6 @@ async function insertMessage(username, message) {
 
 module.exports = {
   getAllMessages,
+  getSingleMessage,
   insertMessage,
 };

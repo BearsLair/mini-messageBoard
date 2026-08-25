@@ -4,11 +4,7 @@ const indexRouter = Router();
 
 indexRouter.get("/", messageControllers.getMessages);
 
-indexRouter.get("/message/:id", (req, res) => {
-  const id = req.params.id;
-
-  res.render("message", { message: messages[id - 1] });
-});
+indexRouter.get("/message/:id", messageControllers.getSingleMessage);
 
 indexRouter.get("/new", (req, res) => {
   res.render("form");
