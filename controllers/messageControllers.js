@@ -22,7 +22,8 @@ async function getSingleMessage(req, res) {
 
 async function getNewMessageForm(req, res) {
   try {
-    res.render("form");
+    // formData passed as null since no user input yet
+    res.render("form", { formData: {} });
   } catch (err) {
     console.error("Error rendering form: ", err);
   }
