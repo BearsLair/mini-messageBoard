@@ -38,7 +38,7 @@ async function postNewMessage(req, res) {
     if (!errors.isEmpty()) {
       return res.status(400).render("form", {
         errors: errors.array(), // Converts errors to array for iteration
-        formData: req.body, // Pass back entered data so user doesn't have re-enter it
+        formData: req.body, // Passes back entered data so user doesn't have re-enter it
       });
     }
 
