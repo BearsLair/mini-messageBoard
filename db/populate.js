@@ -9,14 +9,18 @@ INSERT INTO messages (username, message) VALUES ('catty', 'Hi, All!'), ('bippy',
 `;
 
 async function main() {
-  console.log("seeding...");
-  const client = new Client({
-    connectionString: "postgresql://patrick:7154@localhost:5432/mini_messages",
-  });
-  await client.connect();
-  await client.query(SQL);
-  await client.end();
-  console.log("done");
+  try {
+    console.log("seeding...");
+    const client = new Client({
+      connectionString: DB_URL,
+    });
+    await client.connect();
+    await client.query(SQL);
+    await client.end();
+    console.log("done");
+  } catch (error) {
+    console.error("Error seeding db: ", error);
+  }
 }
 
 main();
