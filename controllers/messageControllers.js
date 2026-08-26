@@ -1,4 +1,5 @@
 const db = require("../db/queries");
+const { validationResult } = require("express-validator");
 
 async function getMessages(req, res) {
   try {
@@ -29,6 +30,18 @@ async function getNewMessageForm(req, res) {
 
 async function postNewMessage(req, res) {
   try {
+    // Retrieve validations errors from request
+    const errors = validationResult(req);
+
+    // Stop execution and display errors if errors found
+    if (!errors.isEmpty()) {
+      return res.status(400).render("form", {
+        errors: errors.array(), // Converts errors to array for iteration
+        formData: req.body, // Pass back entered data so user doesn't have re-enter it
+      });
+    }
+
+    // No errors? Resume with database logic
     const { username, message } = req.body;
     db.postNewMessage(username, message);
     res.redirect("/");
